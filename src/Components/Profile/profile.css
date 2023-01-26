@@ -1,0 +1,12 @@
+.social_profile{
+  display: flex;
+  justify-content:center ;
+  align-items: center;
+  align-content: center;
+  margin: 30px;
+}
+
+.profile-conatiner{
+  margin-top: 0.5em;
+  max-width: fit-content;
+}

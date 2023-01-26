@@ -1,0 +1,6 @@
+.academics-container{
+  display: flex;
+  max-width: 100%;
+  flex-direction: column;
+  margin: 1em;
+}
