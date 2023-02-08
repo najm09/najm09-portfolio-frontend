@@ -45,6 +45,7 @@ export const ACADEMIC_DETAILS = {
 
 export const PROJECT_DETAILS = [
   {
+    "id": 0,
     "title": "Smart Queuing Management System",
     "Tag": "Minor Project",
     "brief": "A smart queuing management system for healthcare is a project that aims to improve the efficiency of the queueing process in healthcare facilities. The system is designed to prioritize senior citizens, who may require more attention and have different healthcare needs compared to younger patients. An efficient algorithm is developed to determine the position of insertion for latecomers into the queue, in order to reduce the overall response time of the entire queue.",
@@ -57,6 +58,7 @@ export const PROJECT_DETAILS = [
     ]
   },
   {
+    "id": 1,
     "title": "Perfect Cup",
     "Tag": "Learning Project",
     "brief": "The Perfect Cup project is a learning project that focuses on user authentication using PHP and MySQL. PHP is a programming language that is commonly used for web development, while MySQL is a popular database management system.In this project, the goal is to develop a system that allows users to create accounts and log in to access certain features or content on a website. The system will use PHP and MySQL to securely store and manage user credentials, such as username and password.The user authentication system will likely involve the implementation of various security measures, such as password hashing and salting, to protect against common security threats such as password cracking and SQL injection attacks.",
@@ -70,6 +72,7 @@ export const PROJECT_DETAILS = [
     ]
   },
   {
+    "id": 2,
     "title": "Music-master",
     "Tag": "Learning Project",
     "brief": "The Music-master project is a project that integrates with the Spotify API to provide a music streaming platform. The project is developed using the React JavaScript library and is designed to learn and practice using React.",
@@ -80,6 +83,7 @@ export const PROJECT_DETAILS = [
     ]
   },
   {
+    "id": 3,
     "title": "Exercise-Tracker",
     "Tag": "Learning Project",
     "brief": "The project is an exercise tracker that allows users to create and log their exercise activities.Overall, the project provided a hands-on learning experience for building a full-stack web application using the MERN stack and implementing CRUD operations in Node.js.",
@@ -93,6 +97,7 @@ export const PROJECT_DETAILS = [
     ]
   },
   {
+    "id": 4,
     "title": "Banking-System-cli",
     "Tag": "OOPs Project",
     "brief": "The project is a command-line interface (CLI) application for a banking system that allows users to perform various banking operations.Overall, the project provides a hands-on learning experience for implementing object-oriented programming principles in C++ and building a functional CLI application for a banking system.",
@@ -104,6 +109,7 @@ export const PROJECT_DETAILS = [
     ]
   },
   {
+    "id": 5,
     "title": "todo-tracker",
     "Tag": "Learning Project",
     "brief": "The project is a to-do tracker that allows users to create and manage their to-do lists.",

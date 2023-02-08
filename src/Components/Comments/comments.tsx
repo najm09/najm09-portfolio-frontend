@@ -9,7 +9,7 @@ import Avatar from '@mui/material/Avatar'
 import Popover from '@mui/material/Popover';
 import Button from '@mui/material/Button';
 import Paper from '@mui/material/Paper';
-import { Chip, Table, TableBody, TableContainer, TableRow } from '@mui/material';
+import { Card, CardContent, Chip, Table, TableBody, TableContainer, TableRow } from '@mui/material';
 
 interface CommentsProps {
   _id?: string;
@@ -47,7 +47,7 @@ function BasicPopover(props: any) {
         }}
       >
         {
-          comment ? comment.map((_comment: any) => {
+          comment != 0 ? comment.map((_comment: any) => {
             return (
               <TableContainer component={Paper}>
                 <Table sx={{ minWidth: 650, height: '50% '}} key={_comment._id}>
@@ -68,7 +68,12 @@ function BasicPopover(props: any) {
                 </Table>
               </TableContainer>
             )
-          }) : "Loading..."
+          }) : 
+          <Card>
+            <CardContent>
+              No Comments Available
+            </CardContent>
+          </Card>
         }
       </Popover>
     </div>
@@ -89,7 +94,7 @@ export default function Comments() {
       await axios.get(`${link}/comments`, { withCredentials: false })
         .then(res => {
           setComments(res.data);
-          setRecentComments(res.data.reverse().slice(0, 3));
+          res.data.length ? setRecentComments(res.data.reverse().slice(0, 3)) : setRecentComments([]);
         })
         .catch(error => {
           setMessage(error.message)

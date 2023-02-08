@@ -1,15 +1,16 @@
-import { PROJECT_DETAILS } from '../../Constants/data';
-import { styled } from '@mui/material/styles';
+import React from 'react';
+import axios from 'axios';
+import {styled} from '@mui/material/styles';
 import ArrowForwardIosSharpIcon from '@mui/icons-material/ArrowForwardIosSharp';
 import MuiAccordion, { AccordionProps } from '@mui/material/Accordion';
-import MuiAccordionSummary, {AccordionSummaryProps,} from '@mui/material/AccordionSummary';
+import MuiAccordionSummary, { AccordionSummaryProps} from '@mui/material/AccordionSummary';
 import MuiAccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
-import { Chip, Grid, Card, CardContent } from '@mui/material'
-import ThumbUpOffAltRoundedIcon from '@mui/icons-material/ThumbUpOffAltRounded';
-import axios from 'axios';
+import {Chip, Grid, Card, CardContent, Button} from '@mui/material'
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import {PROJECT_DETAILS} from '../../Constants/data';
+import {Alert} from '@mui/material';
 import './project.css'
-
 
 const Accordion = styled((props: AccordionProps) => (
   <MuiAccordion disableGutters elevation={3} square {...props} />
@@ -49,32 +50,63 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
 
 const link = process.env.REACT_APP_LINK
 
+
 export default function Projects() {
 
-  const handleCount = (name:string) => {
-    const body = {  name : name}
-    axios.get(`${link}/project`, {data:body})
-    .then(res => console.log(res));
-    axios.post(`${link}/like`, {
-      name : name,
-    })  
+  const [projectLikes, setProjectLikes] = React.useState<string[]>([]);
+  const [message, setMessage] = React.useState("");
+  const [likedTitle, setLikedTitle] = React.useState("")
+
+  const getAllLikes = async () => {
+    await axios.get(`${link}/likes`)
+      .then(res => {
+        let updatedLikes = [...projectLikes]
+        res.data.map((project:any) => (
+          updatedLikes[project.id] = project.likes
+        ))
+        setProjectLikes(updatedLikes);
+      })
+      .catch(error => console.error(error));
   }
+
+  const handleLike = async (id: number, title: string) => {
+    await axios.post(`${link}/like`, {
+      id: id,
+      title: title,
+      likes: projectLikes[id] ? projectLikes[id] : 0
+    })
+      .then(res => {
+        setMessage(res.data.message);
+        setLikedTitle(res.data.title);
+        getAllLikes();
+      });
+  }
+
+  React.useEffect(() => {
+    getAllLikes();
+  }, [])
+
   return (
     <Card className='project-container'>
       <CardContent>
         {
           PROJECT_DETAILS?.map(project => {
             return (
-              <Card>
+              <Card key={project.title}>
                 <Accordion>
                   <AccordionSummary>
                     <Grid container justifyContent='space-between'>
-                      <Chip label={project.title} variant='outlined' color='info' />
+                      {
+                        message && likedTitle === project.title ?
+                          <Alert severity='success'>{message}</Alert> : <Chip label={project.title} variant='outlined' color='info' />
+                      }
                       <Chip label={project.Tag} variant='filled' color='primary' />
                     </Grid>
-                    &nbsp;
-                    <button onClick = {() => handleCount(project.brief)}><ThumbUpOffAltRoundedIcon color="secondary" /></button>
-                    
+                    <Button onClick={() => {handleLike(project.id, project.title) }} color="error">
+                      <FavoriteIcon />
+                      <div>{projectLikes[project.id]}</div>
+                    </Button>
+
                   </AccordionSummary>
                   <AccordionDetails>
                     <Typography paragraph textAlign='left'>{project.brief}</Typography>

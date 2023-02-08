@@ -27,11 +27,11 @@ const steps = [
   },
   {
     label: 'Academics',
-    description: <Academics/>
+    description: <Academics />
   },
   {
     label: 'Projects',
-    description: <Projects />
+    description: <Projects/>
   },
   {
     label: 'Skills',
@@ -70,7 +70,7 @@ export default function App() {
     setAnchorElNav(null);
   };
 
-  const handleNext = (step : number) => {
+  const handleNext = (step: number) => {
     setActiveStep(() => step);
   };
 
