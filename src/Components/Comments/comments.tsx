@@ -47,7 +47,7 @@ function BasicPopover(props: any) {
         }}
       >
         {
-          comment != 0 ? comment.map((_comment: any) => {
+          comment !== 0 ? comment.map((_comment: any) => {
             return (
               <TableContainer component={Paper}>
                 <Table sx={{ minWidth: 650, height: '50% '}} key={_comment._id}>
